@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  if (!fwrite(&pirate1, sizeof(Pirate), 1, out)) {
+  if (!fwrite(pirate1, sizeof(Pirate), 1, out)) {
     perror("fwrite errot");
     return -1;
   }
@@ -29,8 +29,6 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-printf("Pirate1. Name=%s; Age=%d\n", pirate1->name, pirate1->age);
-
   in = fopen("../data/pirate.out", "r");
   if (!in) {
     perror("fopen error");
@@ -38,7 +36,7 @@ printf("Pirate1. Name=%s; Age=%d\n", pirate1->name, pirate1->age);
   }
 
   Pirate *pirate2 = malloc(sizeof(Pirate));
-  if (!fread(&pirate2, sizeof(Pirate), 1, in)) {
+  if (!fread(pirate2, sizeof(Pirate), 1, in)) {
     perror("fread errot");
     return -1;
   }
@@ -50,8 +48,7 @@ printf("Pirate1. Name=%s; Age=%d\n", pirate1->name, pirate1->age);
     return -1;
   }
 
-
-  // /free(pirate1);
+  free(pirate1);
   free(pirate2);
   return 0;
 }
